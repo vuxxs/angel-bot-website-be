@@ -45,11 +45,8 @@ export class AppController {
     // Store the user's information and token securely
     res.cookie('access_token', token, { httpOnly: true, secure: true });
     res.json({ user, guilds });
-
-    res.redirect(this.discordService.generateAuthUrl());
   }
 
-  @Get('user')
   async getUser(@Query('token') token: string) {
     const response = await axios.get('https://discord.com/api/users/@me', {
       headers: {
