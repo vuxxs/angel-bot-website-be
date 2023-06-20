@@ -23,7 +23,7 @@ export class AppController {
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
       grant_type: 'authorization_code',
-      redirect_uri: 'http://localhost:3000/login',
+      redirect_uri: 'http://localhost:3000/home',
       code: code,
       scope: 'identify guilds',
     };
@@ -45,8 +45,11 @@ export class AppController {
     // Store the user's information and token securely
     res.cookie('access_token', token, { httpOnly: true, secure: true });
     res.json({ user, guilds });
+
+    res.redirect(this.discordService.generateAuthUrl());
   }
 
+  @Get('user')
   async getUser(@Query('token') token: string) {
     const response = await axios.get('https://discord.com/api/users/@me', {
       headers: {
