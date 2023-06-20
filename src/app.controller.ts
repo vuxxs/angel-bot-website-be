@@ -23,7 +23,7 @@ export class AppController {
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
       grant_type: 'authorization_code',
-      redirect_uri: 'http://localhost:3000/login',
+      redirect_uri: 'http://localhost:3000/home',
       code: code,
       scope: 'identify guilds',
     };
