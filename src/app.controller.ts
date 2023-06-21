@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import axios from 'axios';
