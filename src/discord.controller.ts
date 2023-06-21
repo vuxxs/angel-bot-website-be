@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 import { Controller, Get, Query, Res, Session } from '@nestjs/common';
 import { Response } from 'express';
 import { DiscordService } from './discord.service';
