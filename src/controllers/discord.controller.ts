@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Res, Session } from '@nestjs/common';
 import { Response } from 'express';
-import { DiscordService } from './discord.service';
+import { DiscordService } from '../services/discord.service';
 
 @Controller('auth/discord')
 export class DiscordController {
