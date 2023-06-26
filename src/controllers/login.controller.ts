@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query, Req, Res } from '@nestjs/common';
 import axios from 'axios';
 import { Response } from 'express';
 import { SessionRequest } from 'src/interfaces/session-request.interface';
@@ -9,7 +9,7 @@ export class LoginController {
   async login(
     @Query('code') code: string,
     @Res() res: Response,
-    @Res() req: SessionRequest,
+    @Req() req: SessionRequest,
   ) {
     const data = {
       client_id: process.env.CLIENT_ID,
@@ -40,7 +40,6 @@ export class LoginController {
       req.session.guilds = guilds;
 
       res.redirect('http://localhost:3000/home');
-      res.send('Login successful');
     } catch (error) {
       console.error('OAuth Error:', error);
       console.log('Response Data:', error.response?.data);
@@ -69,5 +68,14 @@ export class LoginController {
       },
     );
     return response.data;
+  }
+
+  @Get('test') // FIXME remove in production
+  testSession(@Req() req: SessionRequest, @Res() res: Response) {
+    if (req.session.user) {
+      res.send(`Session User: ${JSON.stringify(req.session.user)}`);
+    } else {
+      res.send('No session user');
+    }
   }
 }
