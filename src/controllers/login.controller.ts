@@ -1,11 +1,16 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import axios from 'axios';
 import { Response } from 'express';
+import { SessionRequest } from 'src/interfaces/session-request.interface';
 
 @Controller()
 export class LoginController {
   @Get('login')
-  async login(@Query('code') code: string, @Res() res: Response) {
+  async login(
+    @Query('code') code: string,
+    @Res() res: Response,
+    @Res() req: SessionRequest,
+  ) {
     const data = {
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
@@ -31,8 +36,8 @@ export class LoginController {
       const guilds = await this.getGuilds(token);
 
       // Handle the retrieved user and guild information as needed
-      console.log('User:', user);
-      console.log('Guilds:', guilds);
+      req.session.user = user;
+      req.session.guilds = guilds;
 
       res.redirect('http://localhost:3000/home');
       res.send('Login successful');
