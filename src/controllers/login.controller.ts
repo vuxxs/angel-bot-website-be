@@ -69,4 +69,13 @@ export class LoginController {
     );
     return response.data;
   }
+
+  @Get('test') // FIXME remove in production
+  testSession(@Req() req: SessionRequest, @Res() res: Response) {
+    if (req.session.user) {
+      res.send(`Session User: ${JSON.stringify(req.session.user)}`);
+    } else {
+      res.send('No session user');
+    }
+  }
 }
