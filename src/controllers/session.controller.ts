@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Res, Delete } from '@nestjs/common';
 import { Response } from 'express';
-import { SessionRequest } from './../interfaces/session-request.interface'; // adjust the path as needed
+import { SessionRequest } from './../interfaces/session-request.interface';
 
 @Controller('session')
 export class SessionController {
