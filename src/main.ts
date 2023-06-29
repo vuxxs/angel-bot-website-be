@@ -18,7 +18,7 @@ async function bootstrap() {
       saveUninitialized: false,
       cookie: {
         secure: false, // FIXME set to true if not hosting locally
-        sameSite: 'strict',
+        sameSite: 'lax',
       },
     }),
   );
